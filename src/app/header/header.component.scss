@@ -1,0 +1,25 @@
+@import "./../shared/colors.scss";
+
+.logo {
+  height: 70px;
+}
+
+::ng-deep {
+  .p-menuitem-link-active {
+    border-bottom: 1px solid $green-1;
+    color: $green-1;
+    span.p-menuitem-text,
+    span.p-menuitem-icon {
+      color: $green-1 !important;
+    }
+  }
+}
+
+.fixed-top {
+  z-index: 1000 !important;
+}
+
+@media only screen and (max-width: 768px) {
+  .p-menubar-end {
+  }
+}

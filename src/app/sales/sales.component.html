@@ -1,0 +1,204 @@
+<h4>Sales</h4>
+
+<p-table
+  *ngIf="columns && products"
+  #dt1
+  dataKey="id"
+  [value]="products"
+  class="tab-data"
+  [globalFilterFields]="['id', 'product']"
+  [paginator]="true"
+  [showCurrentPageReport]="true"
+  [rowsPerPageOptions]="[10, 25, 50]"
+  [rows]="10"
+  styleClass="p-datatable-customers p-datatable-gridlines p-datatable-responsive-demo"
+>
+  <ng-template pTemplate="caption">
+    <div class="d-flex justify-content-between">
+      <span class="p-input-icon-left">
+        <i class="pi pi-search"></i>
+        <input
+          pInputText
+          type="text"
+          (input)="dt1.filterGlobal($event.target.value, 'contains')"
+          placeholder="Search keyword"
+        />
+      </span>
+      <span class="p-input-icon-left p-mr-auto">
+        <button
+          pButton
+          pRipple
+          label="New"
+          icon="pi pi-plus"
+          class="p-button-success p-mr-2"
+          (click)="openNew()"
+        ></button>
+      </span>
+    </div>
+  </ng-template>
+
+  <ng-template pTemplate="header">
+    <tr>
+      <th rowspan="3" pSortableColumn="{{ columns[0].field }}">
+        {{ columns[0].header }}
+        <p-sortIcon field="columns[0].field"></p-sortIcon>
+      </th>
+      <th rowspan="3" pSortableColumn="{{ columns[1].field }}">
+        {{ columns[1].header }}
+        <p-sortIcon field=" {{ columns[1].field }}"></p-sortIcon>
+      </th>
+      <th colspan="4">{{ columns[2].header }}</th>
+      <th rowspan="3">{{ columns[3].header }}</th>
+    </tr>
+
+    <tr>
+      <th pSortableColumn="{{ columns[2].subHeaders[0].field }}">
+        {{ columns[2].subHeaders[0].header }}
+        <p-sortIcon field="columns[2].subHeaders[0].field"></p-sortIcon>
+      </th>
+      <th pSortableColumn="{{ columns[2].subHeaders[1].field }}">
+        {{ columns[2].subHeaders[1].header }}
+        <p-sortIcon field="columns[2].subHeaders[1].field"></p-sortIcon>
+      </th>
+      <th pSortableColumn="{{ columns[2].subHeaders[2].field }}">
+        {{ columns[2].subHeaders[2].header }}
+        <p-sortIcon field="columns[2].subHeaders[2].field"></p-sortIcon>
+      </th>
+      <th pSortableColumn="{{ columns[2].subHeaders[3].field }}">
+        {{ columns[2].subHeaders[3].header }}
+        <p-sortIcon field="columns[2].subHeaders[3].field"></p-sortIcon>
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-product>
+    <tr>
+      <td pEditableColumn>
+        <span class="p-column-title"> {{ columns[0].header }}</span>
+        <p-cellEditor>
+          <ng-template pTemplate="input">
+            <input
+              pInputText
+              type="text"
+              class="w-100"
+              [(ngModel)]="product.productID"
+            />
+          </ng-template>
+          <ng-template pTemplate="output">
+            {{ product.productID }}
+          </ng-template>
+        </p-cellEditor>
+      </td>
+      <td pEditableColumn>
+        <span class="p-column-title"> {{ columns[1].header }}</span>
+        <p-cellEditor>
+          <ng-template pTemplate="input">
+            <input
+              class="w-100"
+              pInputText
+              type="text"
+              [(ngModel)]="product.productName"
+            />
+          </ng-template>
+          <ng-template pTemplate="output">
+            {{ product.productName }}
+          </ng-template>
+        </p-cellEditor>
+      </td>
+      <td pEditableColumn>
+        <span class="p-column-title">
+          {{ columns[2].subHeaders[0].header }}</span
+        >
+        <p-cellEditor>
+          <ng-template pTemplate="input">
+            <input
+              class="w-100"
+              pInputText
+              type="text"
+              [(ngModel)]="product.salesQ1"
+            />
+          </ng-template>
+          <ng-template pTemplate="output">
+            {{ product.salesQ1 | currency: "EUR" }}
+          </ng-template>
+        </p-cellEditor>
+      </td>
+      <td pEditableColumn>
+        <span class="p-column-title">
+          {{ columns[2].subHeaders[1].header }}</span
+        >
+        <p-cellEditor>
+          <ng-template pTemplate="input">
+            <input
+              class="w-100"
+              pInputText
+              type="text"
+              [(ngModel)]="product.salesQ2"
+            />
+          </ng-template>
+          <ng-template pTemplate="output">
+            {{ product.salesQ2 | currency: "EUR" }}
+          </ng-template>
+        </p-cellEditor>
+      </td>
+      <td pEditableColumn>
+        <span class="p-column-title">
+          {{ columns[2].subHeaders[2].header }}</span
+        >
+
+        <p-cellEditor>
+          <ng-template pTemplate="input">
+            <input
+              class="w-100"
+              pInputText
+              type="text"
+              [(ngModel)]="product.salesQ3"
+            />
+          </ng-template>
+          <ng-template pTemplate="output">
+            {{ product.salesQ3 | currency: "EUR" }}
+          </ng-template>
+        </p-cellEditor>
+      </td>
+      <td pEditableColumn>
+        <span class="p-column-title">
+          {{ columns[2].subHeaders[3].header }}</span
+        >
+
+        <p-cellEditor>
+          <ng-template pTemplate="input">
+            <input
+              class="w-100"
+              pInputText
+              type="text"
+              [(ngModel)]="product.salesQ4"
+            />
+          </ng-template>
+          <ng-template pTemplate="output">
+            {{ product.salesQ4 | currency: "EUR" }}
+          </ng-template>
+        </p-cellEditor>
+      </td>
+      <td>
+        <span class="p-column-title"> {{ columns[3].header }}</span>
+        {{
+          product.salesQ1 + product.salesQ2 + product.salesQ3 + product.salesQ4
+            | currency: "EUR"
+        }}
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<p-dialog
+  [(visible)]="productDialog"
+  [style]="{ width: '450px' }"
+  header="Product Details"
+  styleClass="mydialog"
+  [modal]="true"
+  styleClass="p-fluid"
+>
+  <ng-template pTemplate="content pt-3">
+    <app-new-product-form></app-new-product-form>
+  </ng-template>
+  <ng-template pTemplate="footer"> </ng-template>
+</p-dialog>

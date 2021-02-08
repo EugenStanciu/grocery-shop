@@ -1,0 +1,138 @@
+<form #newProductForm="ngForm" name="newProductForm" novalidate>
+  <div class="p-field pb-3">
+    <label for="productName">Product name</label>
+    <input
+      type="text"
+      pInputText
+      id="productName"
+      name="productName"
+      #productName="ngModel"
+      maxlength="50"
+      minlength="10"
+      [(ngModel)]="product.productName"
+      required
+      autofocus
+    />
+    <small class="p-error" *ngIf="submitted && !product.productName"
+      >Name is required.</small
+    >
+    <small class="p-error" *ngIf="submitted && productName.errors?.minlength"
+      >Name must have min 10 characters</small
+    >
+    <small class="p-error" *ngIf="submitted && productName.errors?.maxlength"
+      >Name must have min 50 characters</small
+    >
+  </div>
+  <div class="p-field pb-3">
+    <label for="productID">Product id</label>
+    <input
+      type="number"
+      pInputText
+      name="productID"
+      id="productID"
+      #productID="ngModel"
+      [(ngModel)]="product.productID"
+      required
+      pattern="[0-9]{13}"
+    />
+    <small class="p-error" *ngIf="submitted && !product.productID"
+      >Id is required.</small
+    >
+    <small class="p-error" *ngIf="submitted && productID.errors?.pattern"
+      >Id must have 13 digits</small
+    >
+  </div>
+  <div class="p-field pb-3">
+    <label for="name">Product manager</label>
+    <input
+      type="string"
+      pInputText
+      maxlength="30"
+      minlength="10"
+      #manager="ngModel"
+      name="manager"
+      id="manager"
+      [(ngModel)]="product.manager"
+    />
+    <small class="p-error" *ngIf="submitted && manager.errors?.minlength"
+      >Name must have min 10 characters</small
+    >
+    <small class="p-error" *ngIf="submitted && manager.errors?.maxlength"
+      >Name must have min 30 characters</small
+    >
+  </div>
+  <div class="p-field pb-3">
+    <label for="data">Sales start date</label>
+    <p-calendar
+      [(ngModel)]="product.data"
+      [showIcon]="true"
+      name="data"
+      required
+      inputId="icon"
+      [readonlyInput]="true"
+    ></p-calendar>
+    <small class="p-error" *ngIf="submitted && !product.data"
+      >Date is required.</small
+    >
+  </div>
+
+  <div class="p-field pb-3">
+    <label for="salesQ1">Q1 2019 sales</label>
+    <input
+      type="number"
+      pInputText
+      name="salesQ1"
+      id="salesQ1"
+      [(ngModel)]="product.salesQ1"
+    />
+  </div>
+  <div class="p-field pb-3">
+    <label for="salesQ2">Q2 2019 sales</label>
+    <input
+      type="number"
+      pInputText
+      name="salesQ2"
+      id="salesQ2"
+      [(ngModel)]="product.salesQ2"
+    />
+  </div>
+  <div class="p-field pb-3">
+    <label for="salesQ3">Q3 2019 sales</label>
+    <input
+      type="number"
+      pInputText
+      name="salesQ3"
+      id="salesQ3"
+      [(ngModel)]="product.salesQ3"
+    />
+  </div>
+  <div class="p-field pb-3">
+    <label for="salesQ4">Q4 2019 sales</label>
+    <input
+      type="number"
+      pInputText
+      name="salesQ4"
+      id="salesQ4"
+      [(ngModel)]="product.salesQ4"
+    />
+  </div>
+
+  <button
+    class="col-5"
+    pButton
+    pRipple
+    type="button"
+    icon="pi pi-check"
+    label="Save"
+    (click)="saveProduct(newProductForm.valid, newProductForm)"
+  ></button>
+  <button
+    pButton
+    pRipple
+    type="button"
+    icon="pi pi-trash"
+    label="Clear"
+    class="col-5 ml-1 p-button-secondary"
+    (click)="newProductForm.reset()"
+  ></button>
+</form>

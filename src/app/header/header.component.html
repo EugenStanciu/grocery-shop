@@ -1,0 +1,61 @@
+<nav class="navbar fixed-top navbar-light bg-light p-0">
+  <p-menubar [model]="items" class="w-100 border-0">
+    <ng-template pTemplate="start">
+      <div class="px-0 px-lg-5">
+        <img src="assets/images/logo.png" class="logo pr-3" />
+      </div>
+    </ng-template>
+    <ng-template pTemplate="end">
+      <div *ngIf="user">
+        <span class="p-buttonset d-none d-lg-block">
+          <button
+            pButton
+            pRipple
+            label=" {{ user }}"
+            icon="pi pi-check"
+          ></button>
+          <button
+            title="Logout"
+            pButton
+            pRipple
+            label="Logout"
+            icon="pi pi-power-off"
+            (click)="logout()"
+          ></button>
+        </span>
+
+        <button
+          title="Logout"
+          pButton
+          pRipple
+          type="button"
+          icon="pi pi-power-off"
+          class="p-button-rounded p-button-success p-button-info d-sm-block d-md-block d-lg-none"
+          (click)="logout()"
+        ></button>
+      </div>
+
+      <button
+        *ngIf="!user"
+        pButton
+        pRipple
+        title="Login"
+        type="button"
+        icon="pi pi-user"
+        class="p-button-rounded p-button-success p-button-info d-sm-block d-md-block d-lg-none"
+        routerLink="/login"
+      ></button>
+
+      <p-button
+        *ngIf="!user"
+        label="Login"
+        icon="pi pi-user"
+        title="Login"
+        routerLink="/login"
+        iconPos="left"
+        class="d-none d-lg-block"
+      >
+      </p-button>
+    </ng-template>
+  </p-menubar>
+</nav>
